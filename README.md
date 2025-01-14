@@ -5,35 +5,52 @@ This project involves implementing LeNet5, a CNN developed by Yann LeCun for rec
 Model 1: 
 Data: Run data.py to collect MNIST data samples. The MNIST database consists of 28 × 28
 images. You will need to resize them to 32×32 to match the regular database in the original paper.
+
 – We started by defining a class called ”MNISTDataset”. This class is used to prepare and
 process the MNIST dataset for training and testing. It takes images and labels stored in a
 DataFrame.
+
 – The images are resized from 28x28 to 32x32 pixels since the LeNet-5 model expects 32x32
 input size. This is done using the ”resize” method from the ”PIL” library.
+
 – After resizing, the images are normalized so that the pixel values range between 0 and 1,
 which helps the model learn better.
+
 – To match the input format of the model, the images are inverted (black background and white
 digits) and reshaped to add a channel dimension.
+
 – Finally, the dataset is split into a training set and a test set. Both are loaded into DataLoader
 objects, which let us feed the data into the madel in batches.
+
 • Optimization: Use the “Stochastic Diagonal Levenberg-Marquardt” method. Compute the exact
 second derivative for hkk in equation (22) without the approximations in Appendix C.
+
 – The optimizer used here is a custom-defined ”ConstantStepOptimizer”. With the clarifications
 given from the teacher, we used a fixed learning rate of 0.001 to update the model parameters.
+
 – This keeps things simple and helps us focus on understanding how weights are updated during
 back propagation.
+
 • Loss function: Use equation (9). j = 0.1 and i denotes incorrect classes.
+
 – The loss function, implemented in ”compute loss”, measures how well the model predicts the
 correct label. It uses a parameter j = 0.1 to control the penalty for incorrect predictions.
+
 – The function calculates the distance between the predicted and true classes, applying some
 mathematical transformations to get the average loss across all samples in a batch.
 • At every pass (every epoch), track the error rates. You will need the rates for plotting in the
 performance evaluation.
+
 – The training loop runs for 20 epochs, In each epoch:
+
 – We pass batches of images through the model to compute the predicted distances.
+
 – The loss is calculated, and gradients are computed using backpropagation.
+
 – The optimizer updates the model’s weights based on the gradients.
+
 – We calculate the average loss for the epoch and track the training and testing error rates.
+
 
 Model 2: 
 (0) adding image pre-processing block,
