@@ -58,30 +58,43 @@ Model 2:
 undergo several transformations in the pre-processing block before being fed into the model.
 – Test Set Transformation: The test set images are only resized to 32x32, without augmentation,
 to maintain consistency during evaluation.
+
 • (1) data augmentation,
 – Data Augmentation: It uses the ”torchvision.transforms” module to apply:
+
 ∗ Images are rotated randomly by up to 15 degrees, which helps the model become invariant
 to small rotations in the data.
+
 ∗ The images are translated randomly by 10% of their width and height, allowing the model
 to recognize objects despite slight positional changes.
+
 ∗ The images are flipped horizontally at random, which allows the model to handle flipped
 or mirrored versions of the input.
+
 • (2) adopting the modern blocks such as max pooling, and dropout, ReLU, softmax, or Spatial
 Transformation Network,
+
 – ReLU Activation: The ScaledTanh activation is replaced with ReLU, a much more commonly
 used activation fuction in deep learning. ReLU is faster to compute and helps with the
 vanishing gradient problem by providing a constant gradient for positive inputs.
+
 – Max Pooling: The modified code adopts Max Pooling instead of average pooling. Max pooling
 retains the most significant feature from a region, helping the model focus on the strongest
 features.
+
 – Dropout: Dropout was introduced with a probability of 50%. Dropout randomly disables
 a certain percentage of the neurons during training to prevent overfitting by reducing the
 model’s reliance on any perticular neuron.
+
 – Softmax: Softmax is a function that converts raw scores into probabilities, making the model’s
 predictions easier to interpret by showing the likelihood of each class, with the class having
 the highest probability being the predicted one.
+
 • (3) different training schemes.
+
 – Learning Rate Scheduler: A StepLR scheduler is introduced, which reduces the learning rate
 by half after every 5 epochs. This allows the model to fine-tune its parameters and converge
 more efficiently.
+
 • After running ”test2 custom test(needs our mnist.py file to run).py”, we got an accuracy of 93.51%.
+
